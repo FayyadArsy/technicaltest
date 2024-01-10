@@ -50,6 +50,35 @@ namespace FayyadTechnicalBackend.Controllers
                 return BadRequest(new { status = HttpStatusCode.OK, message = "Update Item Failed", });
             }
         }
+        [HttpGet("{Id}")]
+        public virtual ActionResult Get(int Id)
+        {
+            var get = repository.Get(Id);
+            if (get == null)
+            {
+                return NotFound(new { message = "Data Not Found", get });
+            }
+            else
+                return Ok(new { status = HttpStatusCode.OK, message = "Data Found", get });
+        }
+        [HttpDelete("{Id}")]
+        public virtual ActionResult Delete(int Id)
+        {
+
+            var delete = repository.Delete(Id);
+            if (delete >= 1)
+            {
+                return StatusCode(200, new { status = HttpStatusCode.OK, message = "Data Deleted", Data = delete });
+            }
+            else if (delete == 0)
+            {
+                return StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Data Id: " + Id + " Not Found", Data = delete });
+            }
+            else
+            {
+                return StatusCode(500, new { status = HttpStatusCode.InternalServerError, message = "Error", Data = delete });
+            }
+        }
     }
 }
 

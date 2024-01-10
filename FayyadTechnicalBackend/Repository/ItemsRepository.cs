@@ -34,5 +34,19 @@ namespace FayyadTechnicalBackend.Repository
             var result = context.SaveChanges();
             return result;
         }
+        public Items Get(int Id)
+        {
+            return context.Items.Find(Id);
+        }
+        public int Delete(int Id)
+        {
+            var findData = context.Items.Find(Id);
+            if (findData != null)
+            {
+                context.Items.Remove(findData);
+            }
+            var save = context.SaveChanges();
+            return save;
+        }
     }
 }

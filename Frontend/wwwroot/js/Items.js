@@ -27,12 +27,12 @@ $(document).ready(function () {
         render: function (data, type, row) {
             var editButton =
                 '<button class="btn btn-warning" data-placement="left" data-toggle="modal" data-animation="false" title="Edit" onclick="return GetById(' +
-                "1" +
+                row.id +
                 ')"><i class="fa fa-edit"></i></button>';
 
             var deleteButton =
                 '<button class="btn btn-danger" data-placement="right" data-toggle="modal" data-animation="false" title="Delete" onclick="return Delete(' +
-                "1" +
+                row.id +
                 ')"><i class="fa fa-trash"></i></button>';
 
             return (
@@ -102,11 +102,11 @@ $(document).ready(function () {
 
 function GetById(ItemId){
   $.ajax({
-    url: "https://localhost:7269/api/Items",
+    url: "https://localhost:7269/api/Items/" + ItemId,
     type: "GET",
     datatype: "json",
     success: function(result){
-      var obj = result.data
+      var obj = result.get
       $("#ItemId").val(obj.id)
       $("#ItemName").val(obj.name)
       $("#ItemQuantity").val(obj.quantity)
@@ -121,6 +121,80 @@ function GetById(ItemId){
   })
 }
 
+function UpdateItem(){
+  var isValid = true;
+
+    $("input[required]").each(function () {
+        var input = $(this);
+        if (!input.val()) {
+            input.next(".error-message").show();
+            isValid = false;
+        } else {
+            input.next(".error-message").hide();
+        }
+    });
+    if (!isValid) {
+      return;
+    }
+    var Items = new Object()
+    Items.id = $("#ItemId").val()
+    Items.name = $("#ItemName").val()
+    Items.quantity = $("#ItemQuantity").val()
+    Items.price = $("#ItemPrice").val()
+    $.ajax({
+      url: "https://localhost:7269/api/Items/" + ItemId,
+      type: "PUT",
+      data: JSON.stringify(Items),
+      contentType: "application/json; charset=utf-8",
+    }).then((result) => {
+      // debugger;
+      if (result.status == 200) {
+          Swal.fire({
+              icon: "success",
+              title: "Success...",
+              text: "Data has been update!",
+              showConfirmButton: false,
+              timer: 1500,
+          });
+          $("#ModalItem").modal("hide");
+          table.ajax.reload();
+      } else {
+          Swal.fire("Error!", "Data failed to update!", "error");
+          table.ajax.reload();
+      }
+  });
+}
+
+function Delete(ItemId) {
+  // debugger;
+  Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No",
+  }).then((result) => {
+      if (result.value) {
+          $.ajax({
+              url: "https://localhost:7269/api/Items/" + ItemId,
+              type: "DELETE",
+              dataType: "json",
+          }).then((result) => {
+              // debugger;
+              if (result.status == 200) {
+                  Swal.fire("Deleted!", "Item Deleted.", "success");
+                  table.ajax.reload();
+              } else {
+                  Swal.fire("Error!", "Failed to delete.", "error");
+              }
+          });
+      }
+  });
+}
+
 function ClearModalItem(){
   $("#ItemName").val("");
   $("#ItemQuantity").val("");
@@ -132,3 +206,4 @@ function ClearModalItem(){
     input.next(".error-message").hide();
 });
 }
+
