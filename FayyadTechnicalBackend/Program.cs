@@ -14,6 +14,14 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(builder
 builder.Services.AddScoped<ItemsRepository>();
 builder.Services.AddScoped<EmployeesRepository>();
 
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options
+     .AllowAnyOrigin()
+     .AllowAnyHeader()
+     .AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +34,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(options => options
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
 
 app.MapControllers();
 

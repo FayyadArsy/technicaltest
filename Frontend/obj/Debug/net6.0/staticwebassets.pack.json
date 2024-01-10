@@ -293,6 +293,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\C#\\FayyadTechnicalBackend\\Frontend\\wwwroot\\js\\Employees.js",
+      "PackagePath": "staticwebassets\\js\\Employees.js"
+    },
+    {
+      "Id": "D:\\C#\\FayyadTechnicalBackend\\Frontend\\wwwroot\\js\\Items.js",
+      "PackagePath": "staticwebassets\\js\\Items.js"
+    },
+    {
+      "Id": "D:\\C#\\FayyadTechnicalBackend\\Frontend\\wwwroot\\js\\index.js",
+      "PackagePath": "staticwebassets\\js\\index.js"
+    },
+    {
       "Id": "D:\\C#\\FayyadTechnicalBackend\\Frontend\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
