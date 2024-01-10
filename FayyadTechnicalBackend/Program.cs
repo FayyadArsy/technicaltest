@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("APIContext")));
 builder.Services.AddScoped<ItemsRepository>();
-builder.Services.AddScoped<EmployeesRepository>();
+builder.Services.AddScoped<CartRepository>();
 
 builder.Services.AddCors(c =>
 {

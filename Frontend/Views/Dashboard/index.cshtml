@@ -2,13 +2,19 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutDashboard.cshtml";
 }
+<style>
+  * {
+   
+  }
+</style>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Penjualan</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -22,7 +28,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    @* <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -92,24 +98,27 @@
        
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
-    </section>
+    </section> *@
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-8">
+          <div class="col-4">
             <div class="card">
               <div class="card-header">
-                Keranjang
+                Add Product
               </div>
               <div class="card-body">
                 <div class="row mb-3">
                   <div class="col">
-                    <input class="form-control" type="text" placeholder="Item">
+                    <select class="form-control " name="state" id="SelectItem">
+                  
+                    </select>
                   </div>
                   <div class="col">
-                    <input class="form-control" type="text" placeholder="qty">
+                    <input class="form-control" type="text" placeholder="Qty" id="ItemQty">
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" onclick="InputCart()">Submit</button>
                 </div>
                 <div class="row">
                   <div class="col">
@@ -119,15 +128,30 @@
               </div>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-8">
             
           <div class="card">
             <div class="card-header">
-              Featured
+              Keranjang
             </div>
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <a href="#" class=" float-right btn btn-primary">Go somewhere</a>
+            <section class="content">
+            <div class="container-fluid">
+                <table id="tb_items" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Action</th>
+                    
+                    </tr>
+                  </thead>
+                </table>
+            </div>
+          </section>
+              <a href="#" class=" float-right btn btn-primary">Checkout</a>
             </div>
           </div>
 
@@ -136,3 +160,6 @@
       </div>
     </section>
   </div>
+  
+  <script src="~/js/index.js"></script>
+  

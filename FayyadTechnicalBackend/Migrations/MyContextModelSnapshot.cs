@@ -22,26 +22,28 @@ namespace FayyadTechnicalBackend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FayyadTechnicalBackend.Models.Employees", b =>
+            modelBuilder.Entity("FayyadTechnicalBackend.Models.Cart", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("CartId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CartId"));
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ItemsId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
 
-                    b.Property<string>("phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("TransactionId")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CartId");
 
-                    b.ToTable("Employees");
+                    b.HasIndex("ItemsId");
+
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("FayyadTechnicalBackend.Models.Items", b =>
@@ -66,40 +68,13 @@ namespace FayyadTechnicalBackend.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("FayyadTechnicalBackend.Models.Transactions", b =>
+            modelBuilder.Entity("FayyadTechnicalBackend.Models.Cart", b =>
                 {
-                    b.Property<int?>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ID"));
-
-                    b.Property<DateTime?>("Created_At")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Items")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Updated_At")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("FayyadTechnicalBackend.Models.Transactions", b =>
-                {
-                    b.HasOne("FayyadTechnicalBackend.Models.Employees", "Employees")
+                    b.HasOne("FayyadTechnicalBackend.Models.Items", "Items")
                         .WithMany()
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("ItemsId");
 
-                    b.Navigation("Employees");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

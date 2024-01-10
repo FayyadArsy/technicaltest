@@ -7,8 +7,7 @@ namespace FayyadTechnicalBackend.Context
     {
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
         public DbSet<Items> Items { get; set; }
-        public DbSet<Employees> Employees { get; set; }
-        public DbSet<Transactions> Transactions { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
     }
 }
