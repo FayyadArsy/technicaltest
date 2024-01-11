@@ -62,17 +62,17 @@ namespace FayyadTechnicalBackend.Controllers
                 return Ok(new { status = HttpStatusCode.OK, message = "Data Found", get });
         }
         [HttpDelete("{Id}")]
-        public virtual ActionResult Delete(int Id)
+        public virtual ActionResult Delete(int CartId)
         {
 
-            var delete = repository.Delete(Id);
+            var delete = repository.Delete(CartId);
             if (delete >= 1)
             {
                 return StatusCode(200, new { status = HttpStatusCode.OK, message = "Data Deleted", Data = delete });
             }
             else if (delete == 0)
             {
-                return StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Data Id: " + Id + " Not Found", Data = delete });
+                return StatusCode(404, new { status = HttpStatusCode.NotFound, message = "Data Id: " + CartId + " Not Found", Data = delete });
             }
             else
             {

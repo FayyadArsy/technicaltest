@@ -29,14 +29,31 @@ namespace FayyadTechnicalBackend.Repository
 
             };
             context.Cart.Add(insert);
-            var setemployee = context.SaveChanges();
-            return setemployee;
+            var setcart = context.SaveChanges();
+            return setcart;
         }
-        public int Update(Models.Cart employee)
+        public int Update(Cart cart)
         {
-            context.Entry(employee).State = EntityState.Modified;
+            context.Entry(cart).State = EntityState.Modified;
             var result = context.SaveChanges();
             return result;
         }
+        public int Delete(int Id)
+        {
+            var findData = context.Cart.Find(Id);
+            if (findData != null)
+            {
+                context.Cart.Remove(findData);
+            }
+            var save = context.SaveChanges();
+            return save;
+        }
+        public Cart Get(int Id)
+        {
+            return context.Cart
+            .Include(cart => cart.Items) 
+            .FirstOrDefault(cart => cart.CartId == Id);
+        }
+        
     }
 }

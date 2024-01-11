@@ -11,7 +11,7 @@ namespace FayyadTechnicalBackend.Models
         public int? Quantity { get; set; }
         public int? TransactionId { get; set; }
 
-       
+        
         public Items Items { get; set; }
 
     }

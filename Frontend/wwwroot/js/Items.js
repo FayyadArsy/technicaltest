@@ -147,7 +147,6 @@ function UpdateItem(){
       data: JSON.stringify(Items),
       contentType: "application/json; charset=utf-8",
     }).then((result) => {
-      // debugger;
       if (result.status == 200) {
           Swal.fire({
               icon: "success",
@@ -166,7 +165,6 @@ function UpdateItem(){
 }
 
 function Delete(ItemId) {
-  // debugger;
   Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
